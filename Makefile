@@ -8,9 +8,9 @@ VM_make:
 .PHONY: VM_make
 
 test: CompilerBackend.o test.cpp VM_make
-	$(CXX) $(CFLAGS) test.cpp CompilerBackend.o VM/VM.o VM/number.o VM/BigNumber.o -o test
+	$(CXX) $(CFLAGS) test.cpp CompilerBackend.o VM/VM.o VM/number.o VM/BigNumber.o -ldl -pthread -o test
 
-CompilerBackend.o:
+CompilerBackend.o: CompilerBackend.cpp
 	$(CXX) $(CFLAGS) -c CompilerBackend.cpp
 
 clean:
