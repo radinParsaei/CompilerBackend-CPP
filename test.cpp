@@ -5,7 +5,7 @@ using namespace CompilerBackend;
 
 int main() {
   Base* a[] = {
-    new Print(new Number(10))
+    new Print(new Text("Hello"))
   };
 
   cout << "PROGRAM:\n";

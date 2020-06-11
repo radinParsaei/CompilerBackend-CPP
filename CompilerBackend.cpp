@@ -1,12 +1,21 @@
 #include "CompilerBackend.h"
 
-using namespace std;
-
 CompilerBackend::Number::Number(Value data) {
   this->data = data;
 }
 
 std::vector<Value> CompilerBackend::Number::toVMByteCode() {
+  std::vector<Value> a;
+  a.push_back(PUT);
+  a.push_back(data);
+  return a;
+}
+
+CompilerBackend::Text::Text(Value data) {
+  this->data = data;
+}
+
+std::vector<Value> CompilerBackend::Text::toVMByteCode() {
   std::vector<Value> a;
   a.push_back(PUT);
   a.push_back(data);

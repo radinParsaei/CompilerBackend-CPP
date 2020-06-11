@@ -1,4 +1,4 @@
-override CFLAGS := $(CFLAGS) -IVM -IVM/BigNumber/src -IVM/Value -I.
+override CFLAGS := $(CFLAGS) -IVM -IVM/BigNumber/src -IVM/Value -I. -DUSE_UTILS
 
 all: VM_make test
 .PHONY: all

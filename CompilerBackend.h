@@ -19,6 +19,14 @@ namespace CompilerBackend {
     std::vector<Value> toVMByteCode() override;
   };
 
+  class Text : public Base {
+  private:
+    Value data;
+  public:
+    Text(Value data);
+    std::vector<Value> toVMByteCode() override;
+  };
+
   class Print : public Base {
   private:
     Base* data;
