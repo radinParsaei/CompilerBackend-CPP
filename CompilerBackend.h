@@ -2,10 +2,14 @@
 #define COMPILER_BACKEND_H
 
 #include <VM.h>
+#include <map>
 
 using namespace std;
 
 namespace CompilerBackend {
+  inline std::map<std::string, int> variables;
+  inline int variablesCounter;
+
   class Base {
   public:
     virtual std::vector<Value> toVMByteCode() = 0;
@@ -50,6 +54,15 @@ namespace CompilerBackend {
     Base* data;
   public:
     Print(Base* data);
+    std::vector<Value> toVMByteCode() override;
+  };
+
+  class SetVariable : public Base {
+  private:
+    std::string variableName;
+    Base* data;
+  public:
+    SetVariable(std::string variableName, Base* data);
     std::vector<Value> toVMByteCode() override;
   };
 }
