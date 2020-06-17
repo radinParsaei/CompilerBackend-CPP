@@ -8,7 +8,7 @@ int main() {
     new SetVariable("a", new Text("Hello")),
     new SetVariable("a", new Number(10)),
     new Print(new Text("Text")),
-    new Print(new Add(new Text("Hello"), new Number(100)))
+    new Print(new Add(new Variable("a"), new Number(100)))
   };
 
   cout << "PROGRAM:\n";

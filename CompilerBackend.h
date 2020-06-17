@@ -3,6 +3,7 @@
 
 #include <VM.h>
 #include <map>
+#include <Errors.h>
 
 using namespace std;
 
@@ -63,6 +64,14 @@ namespace CompilerBackend {
     Base* data;
   public:
     SetVariable(std::string variableName, Base* data);
+    std::vector<Value> toVMByteCode() override;
+  };
+
+  class Variable : public Base {
+  private:
+    std::string variableName;
+  public:
+    Variable(std::string variableName);
     std::vector<Value> toVMByteCode() override;
   };
 }

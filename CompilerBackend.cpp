@@ -70,7 +70,6 @@ std::vector<Value> CompilerBackend::SetVariable::toVMByteCode() {
   if (variables.find(variableName) == variables.end()) {
     variablesCounter++;
     variables.insert(std::make_pair(variableName, variablesCounter));
-    std::cout << variables[variableName] << "created for " << variableName << "\n\n";
     a.push_back(PUT);
     a.push_back(variablesCounter);
     a.push_back(MEMPUT);
@@ -150,6 +149,93 @@ std::vector<Value> CompilerBackend::SetVariable::toVMByteCode() {
     a.push_back(0);
     a.push_back(MEMSET);
     a.push_back(MEMSET);
+  }
+  return a;
+}
+
+CompilerBackend::Variable::Variable(std::string variableName) {
+  this->variableName = variableName;
+}
+
+std::vector<Value> CompilerBackend::Variable::toVMByteCode() {
+  std::vector<Value> a;
+  if (variables.find(variableName) == variables.end()) {
+    error(ERROR_VARIABLE_DOES_NOT_EXISTS, variableName);
+  } else {
+    a.push_back(REC);
+    a.push_back(PUT);
+    a.push_back(0);
+    a.push_back(MEMGET);
+    a.push_back(PUT);
+    a.push_back(-1);
+    a.push_back(EQ);
+    a.push_back(END);
+    a.push_back(PUT);
+    a.push_back(0);
+    a.push_back(MEMGET);
+    a.push_back(PUT);
+    a.push_back(-1);
+    a.push_back(EQ);
+    a.push_back(WFRUN);
+    a.push_back(PUT);
+    a.push_back(1);
+    a.push_back(PUT);
+    a.push_back(0);
+    a.push_back(MEMSET);
+    a.push_back(REC);
+    a.push_back(PUT);
+    a.push_back(0);
+    a.push_back(MEMGET);
+    a.push_back(PUT);
+    a.push_back(1);
+    a.push_back(ADD);
+    a.push_back(PUT);
+    a.push_back(0);
+    a.push_back(MEMSET);
+    a.push_back(BREAK);
+    a.push_back(END);
+    a.push_back(REC);
+    a.push_back(PUT);
+    a.push_back(0);
+    a.push_back(MEMGET);
+    a.push_back(MEMGET);
+    a.push_back(PUT);
+    a.push_back(variables[variableName]);
+    a.push_back(EQ);
+    a.push_back(IFTRUN);
+    a.push_back(POP);
+    a.push_back(PUT);
+    a.push_back(0);
+    a.push_back(MEMGET);
+    a.push_back(PUT);
+    a.push_back(2);
+    a.push_back(ADD);
+    a.push_back(PUT);
+    a.push_back(0);
+    a.push_back(MEMSET);
+    a.push_back(END);
+    a.push_back(PUT);
+    a.push_back(2);
+    a.push_back(MEMSIZE);
+    a.push_back(DIV);
+    a.push_back(REPEAT);
+    a.push_back(POP);
+    a.push_back(POP);
+    a.push_back(POP);
+    a.push_back(POP);
+    a.push_back(POP);
+    a.push_back(POP);
+    a.push_back(POP);
+    a.push_back(POP);
+    a.push_back(PUT);
+    a.push_back(0);
+    a.push_back(MEMGET);
+    a.push_back(PUT);
+    a.push_back(-1);
+    a.push_back(PUT);
+    a.push_back(0);
+    a.push_back(MEMSET);
+    a.push_back(MEMGET);
   }
   return a;
 }
