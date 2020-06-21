@@ -50,6 +50,20 @@ std::vector<Value> CompilerBackend::Sub::toVMByteCode() {
   return a;
 }
 
+CompilerBackend::Mul::Mul(Base* v1, Base* v2) {
+  this->v1 = v1;
+  this->v2 = v2;
+}
+
+std::vector<Value> CompilerBackend::Mul::toVMByteCode() {
+  std::vector<Value> a = v2->toVMByteCode();
+  for (Value i : v1->toVMByteCode()) {
+    a.push_back(i);
+  }
+  a.push_back(MUL);
+  return a;
+}
+
 CompilerBackend::Print::Print(Base* data) {
   this->data = data;
 }
