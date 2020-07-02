@@ -104,6 +104,15 @@ namespace CompilerBackend {
     std::vector<Value> toVMByteCode() override;
   };
 
+  class isGE : public Base {
+  private:
+    Base* v1;
+    Base* v2;
+  public:
+    isGE(Base* v1, Base* v2);
+    std::vector<Value> toVMByteCode() override;
+  };
+
   class Print : public Base {
   private:
     Base* data;

@@ -134,6 +134,20 @@ std::vector<Value> CompilerBackend::isGT::toVMByteCode() {
   return a;
 }
 
+CompilerBackend::isGE::isGE(Base* v1, Base* v2) {
+  this->v1 = v1;
+  this->v2 = v2;
+}
+
+std::vector<Value> CompilerBackend::isGE::toVMByteCode() {
+  std::vector<Value> a = v2->toVMByteCode();
+  for (Value i : v1->toVMByteCode()) {
+    a.push_back(i);
+  }
+  a.push_back(GE);
+  return a;
+}
+
 CompilerBackend::Print::Print(Base* data) {
   this->data = data;
 }
