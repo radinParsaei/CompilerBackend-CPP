@@ -176,6 +176,16 @@ std::vector<Value> CompilerBackend::isLE::toVMByteCode() {
   return a;
 }
 
+CompilerBackend::Not::Not(Base* v) {
+  this->v = v;
+}
+
+std::vector<Value> CompilerBackend::Not::toVMByteCode() {
+  std::vector<Value> a = v->toVMByteCode();
+  a.push_back(LNOT);
+  return a;
+}
+
 CompilerBackend::Print::Print(Base* data) {
   this->data = data;
 }

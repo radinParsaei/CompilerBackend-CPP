@@ -131,6 +131,14 @@ namespace CompilerBackend {
     std::vector<Value> toVMByteCode() override;
   };
 
+  class Not : public Base {
+  private:
+    Base* v;
+  public:
+    Not(Base* v);
+    std::vector<Value> toVMByteCode() override;
+  };
+
   class Print : public Base {
   private:
     Base* data;
