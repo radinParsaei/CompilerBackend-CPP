@@ -32,6 +32,7 @@ int main() {
   vector<Value> mem;
   vm.attachMem(&mem);
   vm.run(prog);
+  cout << flush;
   cout << "\nMEM:\n";
   for (Value i : mem) {
     cout << i << endl;
