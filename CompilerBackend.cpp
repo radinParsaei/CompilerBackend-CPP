@@ -196,6 +196,16 @@ std::vector<Value> CompilerBackend::BitwiseNot::toVMByteCode() {
   return a;
 }
 
+CompilerBackend::Negative::Negative(Base* v) {
+  this->v = v;
+}
+
+std::vector<Value> CompilerBackend::Negative::toVMByteCode() {
+  std::vector<Value> a = v->toVMByteCode();
+  a.push_back(NEG);
+  return a;
+}
+
 CompilerBackend::Print::Print(Base* data) {
   this->data = data;
 }

@@ -139,6 +139,14 @@ namespace CompilerBackend {
     std::vector<Value> toVMByteCode() override;
   };
 
+  class Negative : public Base {
+  private:
+    Base* v;
+  public:
+    Negative(Base* v);
+    std::vector<Value> toVMByteCode() override;
+  };
+
   class BitwiseNot : public Base {
   private:
     Base* v;
