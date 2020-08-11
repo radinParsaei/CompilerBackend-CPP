@@ -22,6 +22,24 @@ std::vector<Value> CompilerBackend::Text::toVMByteCode() {
   return a;
 }
 
+CompilerBackend::Boolean::Boolean(Value data) {
+  this->data = data;
+}
+
+std::vector<Value> CompilerBackend::Boolean::toVMByteCode() {
+  std::vector<Value> a;
+  a.push_back(PUT);
+  a.push_back(data);
+  return a;
+}
+
+std::vector<Value> CompilerBackend::Null::toVMByteCode() {
+  std::vector<Value> a;
+  a.push_back(PUT);
+  a.push_back(null);
+  return a;
+}
+
 CompilerBackend::Add::Add(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;

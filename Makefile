@@ -6,7 +6,7 @@ all: VM_make test
 ifeq ($(USE_GMP_LIB),1)
 override CFLAGS := $(CFLAGS) -DUSE_GMP_LIB
 VM_make:
-	@(cd VM && $(MAKE) FLAGS="-DUSE_GMP_LIB" VM.o number.o BigNumber.o) 2>&1 > /dev/null
+	@(cd VM && $(MAKE) EXT_CFLAGS="-DUSE_GMP_LIB" VM.o number.o BigNumber.o) 2>&1 > /dev/null
 .PHONY: VM_make
 test: CompilerBackend.o test.cpp VM_make
 	$(CXX) $(CFLAGS) test.cpp CompilerBackend.o VM/VM.o -lgmp -lgmpxx -ldl -pthread -o test

@@ -32,6 +32,19 @@ namespace CompilerBackend {
     std::vector<Value> toVMByteCode() override;
   };
 
+  class Boolean : public Base {
+  private:
+    Value data;
+  public:
+    Boolean(Value data);
+    std::vector<Value> toVMByteCode() override;
+  };
+
+  class Null : public Base {
+  public:
+    std::vector<Value> toVMByteCode() override;
+  };
+
   class Add : public Base {
   private:
     Base* v1;
