@@ -1,51 +1,51 @@
-#include "CompilerBackend.h"
+#include "SyntaxTree.h"
 
-CompilerBackend::Number::Number(Value data) {
+SyntaxTree::Number::Number(Value data) {
   this->data = data;
 }
 
-std::vector<Value> CompilerBackend::Number::toVMByteCode() {
+std::vector<Value> SyntaxTree::Number::toVMByteCode() {
   std::vector<Value> a;
   a.push_back(PUT);
   a.push_back(data);
   return a;
 }
 
-CompilerBackend::Text::Text(Value data) {
+SyntaxTree::Text::Text(Value data) {
   this->data = data;
 }
 
-std::vector<Value> CompilerBackend::Text::toVMByteCode() {
+std::vector<Value> SyntaxTree::Text::toVMByteCode() {
   std::vector<Value> a;
   a.push_back(PUT);
   a.push_back(data);
   return a;
 }
 
-CompilerBackend::Boolean::Boolean(Value data) {
+SyntaxTree::Boolean::Boolean(Value data) {
   this->data = data;
 }
 
-std::vector<Value> CompilerBackend::Boolean::toVMByteCode() {
+std::vector<Value> SyntaxTree::Boolean::toVMByteCode() {
   std::vector<Value> a;
   a.push_back(PUT);
   a.push_back(data);
   return a;
 }
 
-std::vector<Value> CompilerBackend::Null::toVMByteCode() {
+std::vector<Value> SyntaxTree::Null::toVMByteCode() {
   std::vector<Value> a;
   a.push_back(PUT);
   a.push_back(null);
   return a;
 }
 
-CompilerBackend::Add::Add(Base* v1, Base* v2) {
+SyntaxTree::Add::Add(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;
 }
 
-std::vector<Value> CompilerBackend::Add::toVMByteCode() {
+std::vector<Value> SyntaxTree::Add::toVMByteCode() {
   std::vector<Value> a = v2->toVMByteCode();
   for (Value i : v1->toVMByteCode()) {
     a.push_back(i);
@@ -54,12 +54,12 @@ std::vector<Value> CompilerBackend::Add::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::Sub::Sub(Base* v1, Base* v2) {
+SyntaxTree::Sub::Sub(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;
 }
 
-std::vector<Value> CompilerBackend::Sub::toVMByteCode() {
+std::vector<Value> SyntaxTree::Sub::toVMByteCode() {
   std::vector<Value> a = v2->toVMByteCode();
   for (Value i : v1->toVMByteCode()) {
     a.push_back(i);
@@ -68,12 +68,12 @@ std::vector<Value> CompilerBackend::Sub::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::Mul::Mul(Base* v1, Base* v2) {
+SyntaxTree::Mul::Mul(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;
 }
 
-std::vector<Value> CompilerBackend::Mul::toVMByteCode() {
+std::vector<Value> SyntaxTree::Mul::toVMByteCode() {
   std::vector<Value> a = v2->toVMByteCode();
   for (Value i : v1->toVMByteCode()) {
     a.push_back(i);
@@ -82,12 +82,12 @@ std::vector<Value> CompilerBackend::Mul::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::Div::Div(Base* v1, Base* v2) {
+SyntaxTree::Div::Div(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;
 }
 
-std::vector<Value> CompilerBackend::Div::toVMByteCode() {
+std::vector<Value> SyntaxTree::Div::toVMByteCode() {
   std::vector<Value> a = v2->toVMByteCode();
   for (Value i : v1->toVMByteCode()) {
     a.push_back(i);
@@ -96,12 +96,12 @@ std::vector<Value> CompilerBackend::Div::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::Mod::Mod(Base* v1, Base* v2) {
+SyntaxTree::Mod::Mod(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;
 }
 
-std::vector<Value> CompilerBackend::Mod::toVMByteCode() {
+std::vector<Value> SyntaxTree::Mod::toVMByteCode() {
   std::vector<Value> a = v2->toVMByteCode();
   for (Value i : v1->toVMByteCode()) {
     a.push_back(i);
@@ -110,12 +110,12 @@ std::vector<Value> CompilerBackend::Mod::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::isEQ::isEQ(Base* v1, Base* v2) {
+SyntaxTree::Equals::Equals(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;
 }
 
-std::vector<Value> CompilerBackend::isEQ::toVMByteCode() {
+std::vector<Value> SyntaxTree::Equals::toVMByteCode() {
   std::vector<Value> a = v2->toVMByteCode();
   for (Value i : v1->toVMByteCode()) {
     a.push_back(i);
@@ -124,12 +124,12 @@ std::vector<Value> CompilerBackend::isEQ::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::isFEQ::isFEQ(Base* v1, Base* v2) {
+SyntaxTree::StrictEquals::StrictEquals(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;
 }
 
-std::vector<Value> CompilerBackend::isFEQ::toVMByteCode() {
+std::vector<Value> SyntaxTree::StrictEquals::toVMByteCode() {
   std::vector<Value> a = v2->toVMByteCode();
   for (Value i : v1->toVMByteCode()) {
     a.push_back(i);
@@ -138,12 +138,12 @@ std::vector<Value> CompilerBackend::isFEQ::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::isGT::isGT(Base* v1, Base* v2) {
+SyntaxTree::GreaterThan::GreaterThan(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;
 }
 
-std::vector<Value> CompilerBackend::isGT::toVMByteCode() {
+std::vector<Value> SyntaxTree::GreaterThan::toVMByteCode() {
   std::vector<Value> a = v2->toVMByteCode();
   for (Value i : v1->toVMByteCode()) {
     a.push_back(i);
@@ -152,12 +152,12 @@ std::vector<Value> CompilerBackend::isGT::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::isGE::isGE(Base* v1, Base* v2) {
+SyntaxTree::GreaterThanOrEqual::GreaterThanOrEqual(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;
 }
 
-std::vector<Value> CompilerBackend::isGE::toVMByteCode() {
+std::vector<Value> SyntaxTree::GreaterThanOrEqual::toVMByteCode() {
   std::vector<Value> a = v2->toVMByteCode();
   for (Value i : v1->toVMByteCode()) {
     a.push_back(i);
@@ -166,12 +166,12 @@ std::vector<Value> CompilerBackend::isGE::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::isLT::isLT(Base* v1, Base* v2) {
+SyntaxTree::LesserThan::LesserThan(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;
 }
 
-std::vector<Value> CompilerBackend::isLT::toVMByteCode() {
+std::vector<Value> SyntaxTree::LesserThan::toVMByteCode() {
   std::vector<Value> a = v2->toVMByteCode();
   for (Value i : v1->toVMByteCode()) {
     a.push_back(i);
@@ -180,12 +180,12 @@ std::vector<Value> CompilerBackend::isLT::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::isLE::isLE(Base* v1, Base* v2) {
+SyntaxTree::LesserThanOrEqual::LesserThanOrEqual(Base* v1, Base* v2) {
   this->v1 = v1;
   this->v2 = v2;
 }
 
-std::vector<Value> CompilerBackend::isLE::toVMByteCode() {
+std::vector<Value> SyntaxTree::LesserThanOrEqual::toVMByteCode() {
   std::vector<Value> a = v2->toVMByteCode();
   for (Value i : v1->toVMByteCode()) {
     a.push_back(i);
@@ -194,52 +194,52 @@ std::vector<Value> CompilerBackend::isLE::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::Not::Not(Base* v) {
+SyntaxTree::Not::Not(Base* v) {
   this->v = v;
 }
 
-std::vector<Value> CompilerBackend::Not::toVMByteCode() {
+std::vector<Value> SyntaxTree::Not::toVMByteCode() {
   std::vector<Value> a = v->toVMByteCode();
   a.push_back(LNOT);
   return a;
 }
 
-CompilerBackend::BitwiseNot::BitwiseNot(Base* v) {
+SyntaxTree::BitwiseNot::BitwiseNot(Base* v) {
   this->v = v;
 }
 
-std::vector<Value> CompilerBackend::BitwiseNot::toVMByteCode() {
+std::vector<Value> SyntaxTree::BitwiseNot::toVMByteCode() {
   std::vector<Value> a = v->toVMByteCode();
   a.push_back(NOT);
   return a;
 }
 
-CompilerBackend::Negative::Negative(Base* v) {
+SyntaxTree::Negative::Negative(Base* v) {
   this->v = v;
 }
 
-std::vector<Value> CompilerBackend::Negative::toVMByteCode() {
+std::vector<Value> SyntaxTree::Negative::toVMByteCode() {
   std::vector<Value> a = v->toVMByteCode();
   a.push_back(NEG);
   return a;
 }
 
-CompilerBackend::Print::Print(Base* data) {
+SyntaxTree::Print::Print(Base* data) {
   this->data = data;
 }
 
-std::vector<Value> CompilerBackend::Print::toVMByteCode() {
+std::vector<Value> SyntaxTree::Print::toVMByteCode() {
   std::vector<Value> a = data->toVMByteCode();
   a.push_back(PRINT);
   return a;
 }
 
-CompilerBackend::SetVariable::SetVariable(std::string variableName, Base* data) {
+SyntaxTree::SetVariable::SetVariable(std::string variableName, Base* data) {
   this->variableName = variableName;
   this->data = data;
 }
 
-std::vector<Value> CompilerBackend::SetVariable::toVMByteCode() {
+std::vector<Value> SyntaxTree::SetVariable::toVMByteCode() {
   std::vector<Value> a = data->toVMByteCode();
   if (variables.find(variableName) == variables.end()) {
     variablesCounter++;
@@ -327,11 +327,11 @@ std::vector<Value> CompilerBackend::SetVariable::toVMByteCode() {
   return a;
 }
 
-CompilerBackend::Variable::Variable(std::string variableName) {
+SyntaxTree::Variable::Variable(std::string variableName) {
   this->variableName = variableName;
 }
 
-std::vector<Value> CompilerBackend::Variable::toVMByteCode() {
+std::vector<Value> SyntaxTree::Variable::toVMByteCode() {
   std::vector<Value> a;
   if (variables.find(variableName) == variables.end()) {
     error(ERROR_VARIABLE_DOES_NOT_EXISTS, variableName);

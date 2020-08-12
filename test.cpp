@@ -1,7 +1,7 @@
-#include <CompilerBackend.h>
+#include <SyntaxTree.h>
 
 using namespace std;
-using namespace CompilerBackend;
+using namespace SyntaxTree;
 
 int main() {
   Base* a[] = {

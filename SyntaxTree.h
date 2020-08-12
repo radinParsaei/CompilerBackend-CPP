@@ -1,5 +1,5 @@
-#ifndef COMPILER_BACKEND_H
-#define COMPILER_BACKEND_H
+#ifndef SYNTAX_TREE_H
+#define SYNTAX_TREE_H
 
 #include <VM.h>
 #include <map>
@@ -7,7 +7,7 @@
 
 using namespace std;
 
-namespace CompilerBackend {
+namespace SyntaxTree {
   inline std::map<std::string, int> variables;
   inline int variablesCounter;
 
@@ -90,57 +90,57 @@ namespace CompilerBackend {
     std::vector<Value> toVMByteCode() override;
   };
 
-  class isEQ : public Base {
+  class Equals : public Base {
   private:
     Base* v1;
     Base* v2;
   public:
-    isEQ(Base* v1, Base* v2);
+    Equals(Base* v1, Base* v2);
     std::vector<Value> toVMByteCode() override;
   };
 
-  class isFEQ : public Base {
+  class StrictEquals : public Base {
   private:
     Base* v1;
     Base* v2;
   public:
-    isFEQ(Base* v1, Base* v2);
+    StrictEquals(Base* v1, Base* v2);
     std::vector<Value> toVMByteCode() override;
   };
 
-  class isGT : public Base {
+  class GreaterThan : public Base {
   private:
     Base* v1;
     Base* v2;
   public:
-    isGT(Base* v1, Base* v2);
+    GreaterThan(Base* v1, Base* v2);
     std::vector<Value> toVMByteCode() override;
   };
 
-  class isGE : public Base {
+  class GreaterThanOrEqual : public Base {
   private:
     Base* v1;
     Base* v2;
   public:
-    isGE(Base* v1, Base* v2);
+    GreaterThanOrEqual(Base* v1, Base* v2);
     std::vector<Value> toVMByteCode() override;
   };
 
-  class isLT : public Base {
+  class LesserThan : public Base {
   private:
     Base* v1;
     Base* v2;
   public:
-    isLT(Base* v1, Base* v2);
+    LesserThan(Base* v1, Base* v2);
     std::vector<Value> toVMByteCode() override;
   };
 
-  class isLE : public Base {
+  class LesserThanOrEqual : public Base {
   private:
     Base* v1;
     Base* v2;
   public:
-    isLE(Base* v1, Base* v2);
+    LesserThanOrEqual(Base* v1, Base* v2);
     std::vector<Value> toVMByteCode() override;
   };
 
