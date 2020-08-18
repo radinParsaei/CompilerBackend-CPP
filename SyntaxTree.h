@@ -194,6 +194,14 @@ namespace SyntaxTree {
     std::vector<Value> toVMByteCode() override;
   };
 
+  class Exit : public Base {
+  private:
+    Base* data;
+  public:
+    Exit(Base* data);
+    std::vector<Value> toVMByteCode() override;
+  };
+
   class SetVariable : public Base {
   private:
     std::string variableName;

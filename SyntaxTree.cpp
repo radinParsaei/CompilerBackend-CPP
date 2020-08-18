@@ -262,6 +262,16 @@ std::vector<Value> SyntaxTree::Print::toVMByteCode() {
   return a;
 }
 
+SyntaxTree::Exit::Exit(Base* data) {
+  this->data = data;
+}
+
+std::vector<Value> SyntaxTree::Exit::toVMByteCode() {
+  std::vector<Value> a = data->toVMByteCode();
+  a.push_back(EXIT);
+  return a;
+}
+
 SyntaxTree::SetVariable::SetVariable(std::string variableName, Base* data) {
   this->variableName = variableName;
   this->data = data;

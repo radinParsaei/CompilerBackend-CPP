@@ -29,6 +29,7 @@ int main() {
 
   cout << "\nRUN:\n";
   VM vm;
+  vm.autoKill = true;
   vector<Value> mem;
   vm.attachMem(&mem);
   vm.run(prog);
