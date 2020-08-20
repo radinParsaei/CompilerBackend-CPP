@@ -222,6 +222,34 @@ std::vector<Value> SyntaxTree::Or::toVMByteCode() {
   return a;
 }
 
+SyntaxTree::BitwiseAnd::BitwiseAnd(Base* v1, Base* v2) {
+  this->v1 = v1;
+  this->v2 = v2;
+}
+
+std::vector<Value> SyntaxTree::BitwiseAnd::toVMByteCode() {
+  std::vector<Value> a = v2->toVMByteCode();
+  for (Value i : v1->toVMByteCode()) {
+    a.push_back(i);
+  }
+  a.push_back(AND);
+  return a;
+}
+
+SyntaxTree::BitwiseOr::BitwiseOr(Base* v1, Base* v2) {
+  this->v1 = v1;
+  this->v2 = v2;
+}
+
+std::vector<Value> SyntaxTree::BitwiseOr::toVMByteCode() {
+  std::vector<Value> a = v2->toVMByteCode();
+  for (Value i : v1->toVMByteCode()) {
+    a.push_back(i);
+  }
+  a.push_back(OR);
+  return a;
+}
+
 SyntaxTree::Not::Not(Base* v) {
   this->v = v;
 }

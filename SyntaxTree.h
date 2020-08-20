@@ -162,6 +162,24 @@ namespace SyntaxTree {
     std::vector<Value> toVMByteCode() override;
   };
 
+  class BitwiseAnd : public Base {
+  private:
+    Base* v1;
+    Base* v2;
+  public:
+    BitwiseAnd(Base* v1, Base* v2);
+    std::vector<Value> toVMByteCode() override;
+  };
+
+  class BitwiseOr : public Base {
+  private:
+    Base* v1;
+    Base* v2;
+  public:
+    BitwiseOr(Base* v1, Base* v2);
+    std::vector<Value> toVMByteCode() override;
+  };
+
   class Not : public Base {
   private:
     Base* v;
