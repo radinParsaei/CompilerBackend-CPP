@@ -189,6 +189,15 @@ namespace SyntaxTree {
     std::vector<Value> toVMByteCode() override;
   };
 
+  class RightShift : public Base {
+  private:
+    Base* v1;
+    Base* v2;
+  public:
+    RightShift(Base* v1, Base* v2);
+    std::vector<Value> toVMByteCode() override;
+  };
+
   class Not : public Base {
   private:
     Base* v;
