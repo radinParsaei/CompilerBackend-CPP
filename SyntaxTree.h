@@ -162,6 +162,15 @@ namespace SyntaxTree {
     std::vector<Value> toVMByteCode() override;
   };
 
+  class Xor : public Base {
+  private:
+    Base* v1;
+    Base* v2;
+  public:
+    Xor(Base* v1, Base* v2);
+    std::vector<Value> toVMByteCode() override;
+  };
+
   class BitwiseAnd : public Base {
   private:
     Base* v1;
